@@ -22,7 +22,7 @@
           gcc
           cmake
           gnumake
-          flex
+          re-flex
           bison
         ];
       };
