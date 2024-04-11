@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.27)
 
 project(mcc)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_library(compile_options INTERFACE)
 
 target_compile_options(
@@ -26,4 +28,7 @@ add_executable(mcc src/main.cpp)
 
 set_target_properties(mcc PROPERTIES CXX_STANDARD 26 CXX_EXTENSIONS OFF)
 
-target_link_libraries(mcc PRIVATE compile_options)
+target_include_directories(mcc PUBLIC ${CMAKE_BINARY_DIR}/src)
+target_include_directories(mcc PUBLIC src)
+
+target_link_libraries(mcc PRIVATE compile_options reflex parser)

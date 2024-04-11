@@ -1,1 +1,1 @@
-message("TODO")
+add_subdirectory(parser)
