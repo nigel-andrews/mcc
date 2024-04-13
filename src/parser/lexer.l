@@ -3,6 +3,7 @@
 
 id      [_a-zA-Z][a-zA-Z0-9_]*
 eol     \r?\n
+ws      [\t ]
 INT     [0-9]+
 
 %%
@@ -15,5 +16,8 @@ int     out() << "int";
 "{"     out() << "{";
 "}"     out() << "}";
 {id}    out() << "id_" << text();
+";"     out() << ";";
 {eol}   out() << "$\n";
+{ws}    out() << text();
+.       out() << "Unknown symbol : " << text();
 %%
