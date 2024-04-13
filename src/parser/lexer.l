@@ -1,7 +1,7 @@
 %top{
 }
 
-id      [_a-zA-Z][a-zA-Z0-9_]+
+id      [_a-zA-Z][a-zA-Z0-9_]*
 INT     [0-9]+
 
 %%

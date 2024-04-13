@@ -29,6 +29,7 @@
           gnumake
           bison
           buildenv.outputs.packages.${system}.reflex
+          flex # just in case
         ];
       };
     };
