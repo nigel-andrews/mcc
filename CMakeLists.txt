@@ -24,7 +24,7 @@ target_link_options(compile_options INTERFACE
 
 add_subdirectory(src)
 
-add_executable(mcc src/main.cpp)
+add_executable(mcc src/mcc.cpp)
 
 set_target_properties(mcc PROPERTIES CXX_STANDARD 26 CXX_EXTENSIONS OFF)
 
