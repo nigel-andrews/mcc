@@ -29,7 +29,7 @@
           gnumake
           bison
           buildenv.outputs.packages.${system}.reflex
-          flex # just in case
+          llvmPackages_17.libcxx
         ];
       };
     };
