@@ -2,7 +2,8 @@
 #include <fstream>
 #include <iostream>
 
-#include "parser/lexer.h"
+#include "parser/lex.yy.h"
+#include "parser/parser.hpp"
 
 int main(int argc, char** argv)
 {
@@ -17,9 +18,10 @@ int main(int argc, char** argv)
     {
         std::cerr << std::format("Unable to open file : {}\n", argv[1]);
     }
+
     reflex::Input lexer_input(source);
+    yy::Lexer lexer(lexer_input);
+    yy::parser parser(lexer);
 
-    auto ret = Lexer(lexer_input, std::cout).lex();
-
-    return ret;
+    return parser.parse();
 }

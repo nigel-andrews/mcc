@@ -1,0 +1,62 @@
+%require "3.8"
+%language "c++"
+%skeleton "lalr1.cc"
+
+%define api.namespace {yy}
+// This is Bison's own custom variant implementation. Consider maybe switch to
+// std::variant instead ?
+%define api.value.type variant
+%define api.token.constructor
+%define api.parser.class {parser}
+
+%defines
+%output "parser.cpp"
+
+// FIXME: Custom namespace
+%code requires {
+    namespace yy {
+        class Lexer;
+    }
+}
+
+%parse-param { yy::Lexer& lexer }
+
+%code{
+  #include "lex.yy.h"  // header file generated with reflex --header-file
+  #undef yylex
+  #define yylex lexer.yylex  // Within bison's parse() we should invoke lexer.yylex(), not the global yylex()
+}
+
+%define api.token.prefix {TOK_}
+
+%token <int> INT
+
+// FIXME: Identifiers are names that can (and will) be repeated multiple times in a project.
+// If we store this as strings, every time we stumble upon an identifier, we would allocate
+// a string object per encounter. This horrible performance wise so avoid this with another
+// type.
+%token <std::string> ID
+
+%token EOF 0
+
+%%
+term:
+    ID
+|   INT
+;
+
+program:
+       %empty
+|   program term
+|   EOF
+;
+%%
+
+void yy::parser::error(const std::string& msg)
+{
+    // FIXME: Use std::print instead
+    std::cerr << msg << std::endl;
+
+    if (lexer.size() == 0)      // if token is unknown (no match)
+        lexer.matcher().winput(); // skip character
+}

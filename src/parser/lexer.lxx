@@ -1,25 +1,36 @@
-%option namespace=parser
+// TODO: Customize namespace soon
+// %option namespace=parser
 // TODO : Add parsing context as param
 
 %top{
+#include "parser.hpp"
 }
+
+%option bison-complete
+%option bison-cc-namespace=yy
+%option bison-cc-parser=parser
+
+%option namespace=yy
+%option lexer=Lexer
+%option lex=yylex
 
 id      [_a-zA-Z][a-zA-Z0-9_]*
 eol     \r?\n
 INT     [0-9]+
 
 %%
-{eol}   out() << "$\n";
-\s+     out() << text();
-return  out() << "return";
-void    out() << "void";
-int     out() << "int";
-{INT}   out() << "int_" << text();
-"("     out() << "(";
-")"     out() << ")";
-"{"     out() << "{";
-"}"     out() << "}";
-{id}    out() << "id_" << text();
-";"     out() << ";";
-.       out() << "Unknown symbol : " << text();
+{eol}    ;
+\s+      ;
+return   return yy::parser::make_ID(str());
+void     return yy::parser::make_ID(str());
+{INT}    return yy::parser::make_INT(atoi(text()));
+int      return yy::parser::make_ID(str());
+"("      return yy::parser::make_ID(str());
+")"      return yy::parser::make_ID(str());
+"{"      return yy::parser::make_ID(str());
+"}"      return yy::parser::make_ID(str());
+{id}     return yy::parser::make_ID(str());
+";"      return yy::parser::make_ID(str());
+<<EOF>>  return yy::parser::make_EOF();
+.        out() << "Unknown symbol : " << text();
 %%
