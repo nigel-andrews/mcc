@@ -21,10 +21,10 @@ INT     [0-9]+
 %%
 {eol}    ;
 \s+      ;
-return   return yy::parser::make_ID(str());
-void     return yy::parser::make_ID(str());
+"return" return yy::parser::make_ID(str());
+"void"   return yy::parser::make_ID(str());
 {INT}    return yy::parser::make_INT(atoi(text()));
-int      return yy::parser::make_ID(str());
+"int"    return yy::parser::make_ID(str());
 "("      return yy::parser::make_ID(str());
 ")"      return yy::parser::make_ID(str());
 "{"      return yy::parser::make_ID(str());

@@ -8,6 +8,7 @@
 %define api.value.type variant
 %define api.token.constructor
 %define api.parser.class {parser}
+%define parse.error verbose
 
 %defines
 %output "parser.cpp"
@@ -29,6 +30,8 @@
 
 %define api.token.prefix {TOK_}
 
+%expect 0
+
 %token <int> INT
 
 // FIXME: Identifiers are names that can (and will) be repeated multiple times in a project.
@@ -39,16 +42,160 @@
 
 %token EOF 0
 
+// Following the grammar specified in the C99 standard
 %%
-term:
-    ID
-|   INT
+translation_unit:
+    extern_decl
+|   translation_unit extern_decl
 ;
 
-program:
-       %empty
-|   program term
-|   EOF
+extern_decl:
+    func_def
+|   decl
+;
+
+func_def:
+    decl_spec declarator decl_list cmpd_stmt
+|   decl_spec declarator cmpd_stmt
+;
+
+decl_list:
+    decl
+|   decl_list decl
+;
+
+cmpd_stmt:
+    "{" "}"
+|   "{" blk_item_list "}"
+;
+
+blk_item_list:
+    blk_item
+|   blk_item_list blk_item
+;
+
+blk_item:
+    decl
+|   stmt
+;
+
+decl:
+    decl_spec
+|   decl_spec init_declarator_list
+;
+
+decl_spec:
+    // TODO all specifiers
+    type_spec
+|   type_spec decl_spec
+;
+
+type_spec:
+    "int"
+|   "void"
+;
+
+init_declarator_list:
+    init_declarator
+;
+
+init_declarator:
+    declarator
+    // TODO : initializers
+;
+
+declarator:
+    // TODO : Pointers
+    direct_declarator
+;
+
+direct_declarator:
+    ID
+;
+
+stmt:
+    jump_stmt
+;
+
+jump_stmt:
+    // TODO: other stmts
+    "return" expr ";"
+;
+
+expr:
+    assign_expr
+// TODO : comma sep exprs
+;
+
+assign_expr:
+    conditional_expr
+// TODO : assignment exprs
+;
+
+conditional_expr:
+    logic_or_expr
+    // TODO: saving time, everything below will be incomplete
+;
+
+logic_or_expr:
+    logic_and_expr
+;
+
+logic_and_expr:
+    incl_or_expr
+;
+
+incl_or_expr:
+    excl_or_expr
+;
+
+excl_or_expr:
+    and_expr
+;
+
+and_expr:
+    eq_expr
+;
+
+eq_expr:
+    relational_expr
+;
+
+relational_expr:
+    shift_expr
+;
+
+shift_expr:
+    add_expr
+;
+
+add_expr:
+    mul_expr
+;
+
+mul_expr:
+    cast_expr
+;
+
+cast_expr:
+    unary_expr
+;
+
+unary_expr:
+    primary_expr
+;
+
+primary_expr:
+    ID
+|   constant
+;
+
+constant:
+    int_constant
+;
+
+int_constant:
+    INT /* int_suffix */
 ;
 %%
 
