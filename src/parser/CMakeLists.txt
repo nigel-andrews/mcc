@@ -11,6 +11,7 @@ add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp
   COMMAND ${BISON} ${CMAKE_CURRENT_SOURCE_DIR}/parser.yxx
   DEPENDS ${BISON} ${CMAKE_CURRENT_SOURCE_DIR/parser.yxx}
+          ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.h
 )
 
 add_library(parser STATIC

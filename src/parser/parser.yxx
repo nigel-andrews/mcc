@@ -42,6 +42,8 @@
 
 %token EOF 0
 
+%start translation_unit
+
 // Following the grammar specified in the C99 standard
 %%
 translation_unit:
@@ -80,14 +82,17 @@ blk_item:
 ;
 
 decl:
-    decl_spec
-|   decl_spec init_declarator_list
+    decl_spec init_declarator_list_opt ";"
 ;
 
 decl_spec:
+    type_spec decl_spec_opt
     // TODO all specifiers
-    type_spec
-|   type_spec decl_spec
+;
+
+decl_spec_opt:
+    %empty
+|   decl_spec
 ;
 
 type_spec:
@@ -95,13 +100,19 @@ type_spec:
 |   "void"
 ;
 
+init_declarator_list_opt:
+    %empty
+|   init_declarator_list
+;
+
 init_declarator_list:
     init_declarator
+|   init_declarator_list "," init_declarator
 ;
 
 init_declarator:
     declarator
-    // TODO : initializers
+|   declarator "=" initializer
 ;
 
 declarator:
@@ -196,6 +207,40 @@ constant:
 
 int_constant:
     INT /* int_suffix */
+;
+
+initializer:
+    assign_expr
+|   "{" initializer_list "}"
+|   "{" initializer_list "," "}"
+;
+
+initializer_list:
+    designation_opt initializer
+|   initializer_list "," designation_opt initializer
+;
+
+designation_opt:
+    %empty
+|   designation
+;
+
+designation:
+    designator_list "="
+;
+
+designator_list:
+    designator
+|   designator_list designator
+;
+
+designator:
+    "[" constant_expr "]"
+|   "." ID
+;
+
+constant_expr:
+    conditional_expr
 ;
 %%
 
