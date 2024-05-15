@@ -26,7 +26,7 @@ add_subdirectory(src)
 
 add_executable(mcc src/mcc.cpp)
 
-set_target_properties(mcc PROPERTIES CXX_STANDARD 26 CXX_EXTENSIONS OFF)
+set_target_properties(mcc PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
 target_include_directories(mcc PUBLIC ${CMAKE_BINARY_DIR}/src)
 target_include_directories(mcc PUBLIC src)

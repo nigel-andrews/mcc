@@ -2,7 +2,8 @@ find_program(REFLEX reflex DOC "Path to RE/flex C++ lexical analyser generator."
 find_program(BISON bison DOC "Path to GNU Bison C/C++ parser generator.")
 
 add_custom_command(
-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.cpp
+  OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.cpp
+          ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.h
   COMMAND ${REFLEX} ${CMAKE_CURRENT_SOURCE_DIR}/lexer.lxx
   --header-file --bison-complete --lexer=Lexer
   DEPENDS ${REFLEX} ${CMAKE_CURRENT_SOURCE_DIR}/lexer.lxx)
@@ -18,5 +19,7 @@ add_library(parser STATIC
   ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp
 )
+
+set_target_properties(parser PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
 target_link_libraries(parser PRIVATE reflex)
