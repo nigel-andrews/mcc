@@ -1,6 +1,9 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.29)
 
-project(mcc)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_COMPILER clang++)
+
+project(mcc LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -11,7 +14,7 @@ target_compile_options(
   INTERFACE "-Wall"
             "-Wextra"
             "-pedantic"
-            "-std=c++23"
+            "-std=c++2b"
             $<$<CONFIG:Release>:-O3>
             $<$<CONFIG:Release>:-Werror>
             $<$<CONFIG:Debug>:-O0>
