@@ -23,16 +23,11 @@
 
       devShells.${system}.default = with pkgs; mkShell {
         packages = [
+          gcc14
           cmake
           gnumake
           bison
           buildenv.outputs.packages.${system}.reflex
-          llvmPackages_18.libcxx
-          llvmPackages_18.libcxxStdenv
-          llvmPackages_18.libllvm
-          llvmPackages_18.libcxxClang
-          llvmPackages_18.compiler-rt
-          llvmPackages_18.mlir
         ];
       };
     };
