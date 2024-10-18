@@ -13,7 +13,11 @@ namespace misc
         symbol(const std::string& s);
 
         const std::string& get();
-        operator const std::string&();
+
+        operator const std::string&() const;
+
+        bool operator==(const std::string& other) const;
+        bool operator!=(const std::string& other) const;
 
     private:
         std::unordered_set<std::string>& set_instance();

@@ -17,6 +17,8 @@ if(NOT BISON)
   message(FATAL_ERROR "Bison not found")
 endif()
 
+find_package(GTest)
+
 add_library(compile_options INTERFACE)
 
 target_compile_options(
@@ -35,12 +37,13 @@ target_link_options(compile_options INTERFACE
                     $<$<CONFIG:Debug>:-fsanitize=address>)
 
 add_subdirectory(src)
+add_subdirectory(tests)
 
 add_executable(mcc src/mcc.cpp)
 
 set_target_properties(mcc PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
-target_include_directories(mcc PUBLIC ${CMAKE_BINARY_DIR}/src src)
+target_include_directories(mcc PUBLIC ${CMAKE_BINARY_DIR}/src)
 
 # Include directories doesn't work because .... ?
 find_path(REFLEX_PATH reflex)

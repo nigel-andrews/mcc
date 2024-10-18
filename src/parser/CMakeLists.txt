@@ -18,5 +18,5 @@ add_library(parser STATIC ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.cpp
 
 set_target_properties(parser PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
-target_include_directories(parser PUBLIC ${CMAKE_SOURCE_DIR}/src src)
-target_link_libraries(parser PRIVATE reflex_shared_lib)
+target_include_directories(parser PUBLIC ${CMAKE_SOURCE_DIR}/src)
+target_link_libraries(parser PRIVATE compile_options reflex_shared_lib)
