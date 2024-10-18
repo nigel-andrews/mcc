@@ -11,11 +11,6 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-
-      packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-      packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
       devShells.${system}.default = with pkgs; mkShell {
         packages = [
           # programs
@@ -24,7 +19,7 @@
           cmake
           gnumake
           bison
-          re-flex.dev
+          re-flex
           clang-tools
 
           # libs
