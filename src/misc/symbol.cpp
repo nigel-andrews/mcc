@@ -2,7 +2,7 @@
 
 namespace misc
 {
-    symbol::symbol(std::string& s)
+    symbol::symbol(const char* s)
         : value_(&*set_instance().insert(s).first)
     {}
 

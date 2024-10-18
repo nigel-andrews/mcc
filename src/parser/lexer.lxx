@@ -3,6 +3,7 @@
 // TODO : Add parsing context as param
 
 %top{
+#include "misc/symbol.h"
 #include "parser.hpp"
 }
 
