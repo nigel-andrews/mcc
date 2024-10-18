@@ -9,14 +9,14 @@ namespace misc
     class symbol
     {
     public:
-        symbol(std::string& s);
+        symbol(const char* s = "");
         symbol(const std::string& s);
 
         const std::string& get();
         operator const std::string&();
 
     private:
-        static std::unordered_set<std::string>& set_instance();
+        std::unordered_set<std::string>& set_instance();
 
         const std::string* value_;
     };

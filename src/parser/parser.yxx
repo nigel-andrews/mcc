@@ -18,6 +18,7 @@
     namespace yy {
         class Lexer;
     }
+  #include "misc/symbol.h"
 }
 
 %parse-param { yy::Lexer& lexer }
@@ -38,7 +39,7 @@
 // If we store this as strings, every time we stumble upon an identifier, we would allocate
 // a string object per encounter. This horrible performance wise so avoid this with another
 // type.
-%token <std::string> ID
+%token <misc::symbol> ID
 
 %token EOF 0
 
