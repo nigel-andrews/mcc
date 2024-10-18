@@ -18,12 +18,17 @@
 
       devShells.${system}.default = with pkgs; mkShell {
         packages = [
+          # programs
           gcc14
+          gdb
           cmake
           gnumake
           bison
           re-flex.dev
           clang-tools
+
+          # libs
+          gtest
         ];
       };
     };
