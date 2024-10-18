@@ -46,4 +46,4 @@ target_include_directories(mcc PUBLIC ${CMAKE_BINARY_DIR}/src src)
 find_path(REFLEX_PATH reflex)
 target_compile_options(mcc PRIVATE "-I${REFLEX_PATH}")
 
-target_link_libraries(mcc PRIVATE compile_options reflex parser)
+target_link_libraries(mcc PRIVATE compile_options reflex_shared_lib parser misc)
