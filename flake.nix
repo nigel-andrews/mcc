@@ -3,14 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    buildenv = {
-      url =
-        "git+https://gitlab.lre.epita.fr/tiger/buildenv?ref=master&dir=nix";
-      inputs = { nixpkgs.follows = "nixpkgs"; };
-    };
   };
 
-  outputs = { self, nixpkgs, buildenv }:
+  outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -27,7 +22,8 @@
           cmake
           gnumake
           bison
-          buildenv.outputs.packages.${system}.reflex
+          re-flex.dev
+          clang-tools
         ];
       };
     };
