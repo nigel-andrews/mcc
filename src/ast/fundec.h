@@ -2,8 +2,7 @@
 
 #include <vector>
 
-#include "ast/node.h"
-#include "ast/return_stmt.h"
+#include "ast/fwd.h"
 #include "misc/symbol.h"
 
 namespace ast
@@ -19,8 +18,7 @@ namespace ast
     private:
         misc::symbol name_;
 
-        // FIXME: Compound statements
-        std::vector<ReturnStmt> stmts_;
+        std::vector<StmtPtr> stmts_;
 
         // TODO: Function + return type
     };

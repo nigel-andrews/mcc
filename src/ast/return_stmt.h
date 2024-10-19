@@ -1,13 +1,9 @@
 #pragma once
 
-#include <any>
-
-#include "ast/int_expr.h"
-#include "ast/node.h"
+#include "ast/fwd.h"
 
 namespace ast
 {
-    // FIXME: Need to declare what stmts are somewhere (ast fwd file)
     class ReturnStmt : Node
     {
     public:
@@ -16,6 +12,6 @@ namespace ast
         {}
 
     private:
-        std::optional<IntExpr> expr_;
+        ExprPtr expr_;
     };
 } // namespace ast
