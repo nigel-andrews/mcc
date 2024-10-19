@@ -22,6 +22,7 @@ namespace misc
     private:
         std::unordered_set<std::string>& set_instance();
 
+    private:
         const std::string* value_;
     };
 } // namespace misc
