@@ -5,11 +5,15 @@
 %top{
 #include "misc/symbol.h"
 #include "parser.hpp"
+#include "location.h"
 }
 
 %option bison-complete
 %option bison-cc-namespace=yy
 %option bison-cc-parser=parser
+%option bison-locations
+
+%option exception="yy::parser::syntax_error(location(), \"Unknown token.\")"
 
 %option namespace=yy
 %option lexer=Lexer
@@ -22,16 +26,16 @@ INT     [0-9]+
 %%
 {eol}    ;
 \s+      ;
-"return" return yy::parser::make_ID(str());
-"void"   return yy::parser::make_ID(str());
-{INT}    return yy::parser::make_INT(atoi(text()));
-"int"    return yy::parser::make_ID(str());
-"("      return yy::parser::make_ID(str());
-")"      return yy::parser::make_ID(str());
-"{"      return yy::parser::make_ID(str());
-"}"      return yy::parser::make_ID(str());
-{id}     return yy::parser::make_ID(str());
-";"      return yy::parser::make_ID(str());
-<<EOF>>  return yy::parser::make_EOF();
+"return" return yy::parser::make_ID(str(), location());
+"void"   return yy::parser::make_ID(str(), location());
+{INT}    return yy::parser::make_INT(atoi(text()), location());
+"int"    return yy::parser::make_ID(str(), location());
+"("      return yy::parser::make_ID(str(), location());
+")"      return yy::parser::make_ID(str(), location());
+"{"      return yy::parser::make_ID(str(), location());
+"}"      return yy::parser::make_ID(str(), location());
+{id}     return yy::parser::make_ID(str(), location());
+";"      return yy::parser::make_ID(str(), location());
+<<EOF>>  return yy::parser::make_EOF(location());
 .        out() << "Unknown symbol : " << text();
 %%
