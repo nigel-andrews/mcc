@@ -13,6 +13,9 @@
 %defines
 %output "parser.cpp"
 
+%locations
+%define api.location.file "location.h"
+
 // FIXME: Custom namespace
 %code requires {
     namespace yy {
@@ -245,11 +248,9 @@ constant_expr:
 ;
 %%
 
-void yy::parser::error(const std::string& msg)
+void yy::parser::error(const location& loc, const std::string& msg)
 {
-    // FIXME: Use std::print instead
-    std::cerr << msg << std::endl;
-
-    if (lexer.size() == 0)      // if token is unknown (no match)
-        lexer.matcher().winput(); // skip character
+  std::cerr << loc << ": " << msg << std::endl;
+  if (lexer.size() == 0)      // if token is unknown (no match)
+    lexer.matcher().winput(); // skip character
 }
