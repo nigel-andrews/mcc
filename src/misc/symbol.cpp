@@ -22,8 +22,19 @@ namespace misc
         return set;
     }
 
-    symbol::operator const std::string&()
+    symbol::operator const std::string&() const
     {
         return *value_;
     }
+
+    bool symbol::operator==(const std::string& other) const
+    {
+        return *value_ == other;
+    }
+
+    bool symbol::operator!=(const std::string& other) const
+    {
+        return *value_ != other;
+    }
+
 } // namespace misc
