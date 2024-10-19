@@ -22,6 +22,7 @@
             bison
             re-flex
             clang-tools
+            pre-commit
 
             # libs
             gtest
