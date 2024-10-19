@@ -36,4 +36,5 @@ namespace misc
     {
         return *value_ != other;
     }
+
 } // namespace misc
