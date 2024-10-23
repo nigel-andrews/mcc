@@ -22,16 +22,16 @@ INT     [0-9]+
 %%
 {eol}    ;
 \s+      ;
-"return" return parse::Parser::make_ID(str(), location());
-"void"   return parse::Parser::make_ID(str(), location());
-{INT}    return parse::Parser::make_INT(atoi(text()), location());
-"int"    return parse::Parser::make_ID(str(), location());
-"("      return parse::Parser::make_ID(str(), location());
-")"      return parse::Parser::make_ID(str(), location());
-"{"      return parse::Parser::make_ID(str(), location());
-"}"      return parse::Parser::make_ID(str(), location());
+"return" return parse::Parser::make_RETURN(location());
+"void"   return parse::Parser::make_VOID(location());
+{INT}    return parse::Parser::make_INT_VAL(atoi(text()), location());
+"int"    return parse::Parser::make_INT(location());
+"("      return parse::Parser::make_LPAREN(location());
+")"      return parse::Parser::make_RPAREN(location());
+"{"      return parse::Parser::make_LBRACE(location());
+"}"      return parse::Parser::make_RBRACE(location());
 {id}     return parse::Parser::make_ID(str(), location());
-";"      return parse::Parser::make_ID(str(), location());
+";"      return parse::Parser::make_SEMI(location());
 <<EOF>>  return parse::Parser::make_EOF(location());
 .        out() << "Unknown symbol : " << text();
 %%

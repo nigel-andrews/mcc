@@ -3,8 +3,6 @@
 %skeleton "lalr1.cc"
 
 %define api.namespace {parse}
-// This is Bison's own custom variant implementation. Consider maybe switch to
-// std::variant instead ?
 %define api.value.type variant
 %define api.token.constructor
 %define api.parser.class {Parser}
@@ -16,7 +14,6 @@
 %locations
 %define api.location.file "location.h"
 
-// FIXME: Custom namespace
 %code requires {
     namespace parse {
         class Lexer;
@@ -36,9 +33,17 @@
 
 %expect 0
 
-%token <int> INT
-
 %token <misc::symbol> ID
+%token <int> INT_VAL
+
+%token INT "int"
+%token VOID "void"
+%token RETURN "return"
+%token SEMI ";"
+%token LPAREN "("
+%token RPAREN ")"
+%token LBRACE "{"
+%token RBRACE "}"
 
 %token EOF 0
 
@@ -206,7 +211,7 @@ constant:
 ;
 
 int_constant:
-    INT /* int_suffix */
+    INT_VAL /* int_suffix */
 ;
 
 initializer:
