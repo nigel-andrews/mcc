@@ -92,7 +92,7 @@ decl:
 
 decl_spec:
     type_spec decl_spec_opt
-    // TODO all specifiers
+    // TODO: all specifiers
 ;
 
 decl_spec_opt:
@@ -103,6 +103,22 @@ decl_spec_opt:
 type_spec:
     "int"
 |   "void"
+;
+
+parameter_type_list:
+    parameter_list
+|   "void"
+// TODO: Variadic parameters
+;
+
+parameter_list:
+    parameter_declaration
+// TODO: multiple parameters
+;
+
+parameter_declaration:
+    decl_spec declarator
+// TODO: Abstract declarators
 ;
 
 init_declarator_list_opt:
@@ -127,6 +143,7 @@ declarator:
 
 direct_declarator:
     ID
+|   direct_declarator "(" parameter_type_list ")"
 ;
 
 stmt:
