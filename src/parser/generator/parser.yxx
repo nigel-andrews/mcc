@@ -51,219 +51,219 @@
 
 // Following the grammar specified in the C99 standard
 %%
-translation_unit:
-    extern_decl
-|   translation_unit extern_decl
-;
+translation_unit
+    : extern_decl
+    | translation_unit extern_decl
+    ;
 
-extern_decl:
-    func_def
-|   decl
-;
+extern_decl
+    : func_def
+    | decl
+    ;
 
-func_def:
-    decl_spec declarator decl_list cmpd_stmt
-|   decl_spec declarator cmpd_stmt
-;
+func_def
+    : decl_spec declarator decl_list cmpd_stmt
+    | decl_spec declarator cmpd_stmt
+    ;
 
-decl_list:
-    decl
-|   decl_list decl
-;
+decl_list
+    : decl
+    | decl_list decl
+    ;
 
-cmpd_stmt:
-    "{" "}"
-|   "{" blk_item_list "}"
-;
+cmpd_stmt
+    : "{" "}"
+    | "{" blk_item_list "}"
+    ;
 
-blk_item_list:
-    blk_item
-|   blk_item_list blk_item
-;
+blk_item_list
+    : blk_item
+    | blk_item_list blk_item
+    ;
 
-blk_item:
-    decl
-|   stmt
-;
+blk_item
+    : decl
+    | stmt
+    ;
 
-decl:
-    decl_spec init_declarator_list_opt ";"
-;
+decl
+    : decl_spec init_declarator_list_opt ";"
+    ;
 
-decl_spec:
-    type_spec decl_spec_opt
+decl_spec
+    : type_spec decl_spec_opt
     // TODO: all specifiers
-;
+    ;
 
-decl_spec_opt:
-    %empty
-|   decl_spec
-;
+decl_spec_opt
+    : %empty
+    | decl_spec
+    ;
 
-type_spec:
-    "int"
-|   "void"
-;
+type_spec
+    : "int"
+    | "void"
+    ;
 
-parameter_type_list:
-    parameter_list
-|   "void"
-// TODO: Variadic parameters
-;
+parameter_type_list
+    : parameter_list
+    | "void"
+    // TODO: Variadic parameters
+    ;
 
-parameter_list:
-    parameter_declaration
-// TODO: multiple parameters
-;
+parameter_list
+    : parameter_declaration
+    // TODO: multiple parameters
+    ;
 
-parameter_declaration:
-    decl_spec declarator
-// TODO: Abstract declarators
-;
+parameter_declaration
+    : decl_spec declarator
+    // TODO: Abstract declarators
+    ;
 
-init_declarator_list_opt:
-    %empty
-|   init_declarator_list
-;
+init_declarator_list_opt
+    : %empty
+    | init_declarator_list
+    ;
 
-init_declarator_list:
-    init_declarator
-|   init_declarator_list "," init_declarator
-;
+init_declarator_list
+    : init_declarator
+    | init_declarator_list "," init_declarator
+    ;
 
-init_declarator:
-    declarator
-|   declarator "=" initializer
-;
+init_declarator
+    : declarator
+    | declarator "=" initializer
+    ;
 
-declarator:
-    // TODO : Pointers
-    direct_declarator
-;
+declarator
+    : direct_declarator
+     // TODO : Pointers
+    ;
 
-direct_declarator:
-    ID
-|   direct_declarator "(" parameter_type_list ")"
-;
+direct_declarator
+    : ID
+    | direct_declarator "(" parameter_type_list ")"
+    ;
 
-stmt:
-    jump_stmt
-;
+stmt
+    : jump_stmt
+    ;
 
-jump_stmt:
+jump_stmt
+    : "return" expr ";"
     // TODO: other stmts
-    "return" expr ";"
-;
+    ;
 
-expr:
-    assign_expr
-// TODO : comma sep exprs
-;
+expr
+    : assign_expr
+    // TODO : comma sep exprs
+    ;
 
-assign_expr:
-    conditional_expr
-// TODO : assignment exprs
-;
+assign_expr
+    : conditional_expr
+    // TODO : assignment exprs
+    ;
 
-conditional_expr:
-    logic_or_expr
+conditional_expr
+    : logic_or_expr
     // TODO: saving time, everything below will be incomplete
-;
+    ;
 
-logic_or_expr:
-    logic_and_expr
-;
+logic_or_expr
+    : logic_and_expr
+    ;
 
-logic_and_expr:
-    incl_or_expr
-;
+logic_and_expr
+    : incl_or_expr
+    ;
 
-incl_or_expr:
-    excl_or_expr
-;
+incl_or_expr
+    : excl_or_expr
+    ;
 
-excl_or_expr:
-    and_expr
-;
+excl_or_expr
+    : and_expr
+    ;
 
-and_expr:
-    eq_expr
-;
+and_expr
+    : eq_expr
+    ;
 
-eq_expr:
-    relational_expr
-;
+eq_expr
+    : relational_expr
+    ;
 
-relational_expr:
-    shift_expr
-;
+relational_expr
+    : shift_expr
+    ;
 
-shift_expr:
-    add_expr
-;
+shift_expr
+    : add_expr
+    ;
 
-add_expr:
-    mul_expr
-;
+add_expr
+    : mul_expr
+    ;
 
-mul_expr:
-    cast_expr
-;
+mul_expr
+    : cast_expr
+    ;
 
-cast_expr:
-    unary_expr
-;
+cast_expr
+    : unary_expr
+    ;
 
-unary_expr:
-    primary_expr
-;
+unary_expr
+    : primary_expr
+    ;
 
-primary_expr:
-    ID
-|   constant
-;
+primary_expr
+    : ID
+    | constant
+    ;
 
-constant:
-    int_constant
-;
+constant
+    : int_constant
+    ;
 
-int_constant:
-    INT_VAL /* int_suffix */
-;
+int_constant
+    : INT_VAL /* int_suffix */
+    ;
 
-initializer:
-    assign_expr
-|   "{" initializer_list "}"
-|   "{" initializer_list "," "}"
-;
+initializer
+    : assign_expr
+    | "{" initializer_list "}"
+    | "{" initializer_list "," "}"
+    ;
 
-initializer_list:
-    designation_opt initializer
-|   initializer_list "," designation_opt initializer
-;
+initializer_list
+    : designation_opt initializer
+    | initializer_list "," designation_opt initializer
+    ;
 
-designation_opt:
-    %empty
-|   designation
-;
+designation_opt
+    : %empty
+    | designation
+    ;
 
-designation:
-    designator_list "="
-;
+designation
+    : designator_list "="
+    ;
 
-designator_list:
-    designator
-|   designator_list designator
-;
+designator_list
+    : designator
+    | designator_list designator
+    ;
 
-designator:
-    "[" constant_expr "]"
-|   "." ID
-;
+designator
+    : "[" constant_expr "]"
+    | "." ID
+    ;
 
-constant_expr:
-    conditional_expr
-;
+constant_expr
+    : conditional_expr
+    ;
 %%
 
 void parse::Parser::error(const location& loc, const std::string& msg)
