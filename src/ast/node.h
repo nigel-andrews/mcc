@@ -1,6 +1,6 @@
 #pragma once
 
-#include "parser/location.h"
+#include "parser/generator/location.h"
 
 namespace ast
 {
