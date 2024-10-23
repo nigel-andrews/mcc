@@ -7,7 +7,7 @@
 // std::variant instead ?
 %define api.value.type variant
 %define api.token.constructor
-%define api.parser.class {parser}
+%define api.parser.class {Parser}
 %define parse.error verbose
 
 %defines
@@ -244,7 +244,7 @@ constant_expr:
 ;
 %%
 
-void parse::parser::error(const location& loc, const std::string& msg)
+void parse::Parser::error(const location& loc, const std::string& msg)
 {
   std::cerr << loc << ": " << msg << std::endl;
   if (lexer.size() == 0)      // if token is unknown (no match)

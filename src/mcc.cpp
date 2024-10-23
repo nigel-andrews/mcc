@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 
     reflex::Input lexer_input(source);
     parse::Lexer lexer(lexer_input);
-    parse::parser parser(lexer);
+    parse::Parser parser(lexer);
 
     return parser.parse();
 }
