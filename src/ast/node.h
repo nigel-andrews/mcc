@@ -7,18 +7,18 @@ namespace ast
     class Node
     {
     public:
-        Node(const yy::location& loc)
+        Node(const parse::location& loc)
             : loc_(loc)
         {}
 
         virtual ~Node() = default;
 
-        const yy::location& loc_get()
+        const parse::location& loc_get()
         {
             return loc_;
         }
 
     private:
-        yy::location loc_;
+        parse::location loc_;
     };
 } // namespace ast

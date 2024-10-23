@@ -2,7 +2,7 @@
 %language "c++"
 %skeleton "lalr1.cc"
 
-%define api.namespace {yy}
+%define api.namespace {parse}
 // This is Bison's own custom variant implementation. Consider maybe switch to
 // std::variant instead ?
 %define api.value.type variant
@@ -18,13 +18,13 @@
 
 // FIXME: Custom namespace
 %code requires {
-    namespace yy {
+    namespace parse {
         class Lexer;
     }
   #include "misc/symbol.h"
 }
 
-%parse-param { yy::Lexer& lexer }
+%parse-param { parse::Lexer& lexer }
 
 %code{
   #include "lex.yy.h"  // header file generated with reflex --header-file
@@ -244,7 +244,7 @@ constant_expr:
 ;
 %%
 
-void yy::parser::error(const location& loc, const std::string& msg)
+void parse::parser::error(const location& loc, const std::string& msg)
 {
   std::cerr << loc << ": " << msg << std::endl;
   if (lexer.size() == 0)      // if token is unknown (no match)

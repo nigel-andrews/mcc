@@ -7,7 +7,7 @@ namespace ast
     class IntExpr : Node
     {
     public:
-        IntExpr(const yy::location& loc, int val)
+        IntExpr(const parse::location& loc, int val)
             : Node(loc)
             , val_(val)
         {}

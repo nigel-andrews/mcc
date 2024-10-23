@@ -7,7 +7,7 @@ namespace ast
     class ReturnStmt : Node
     {
     public:
-        ReturnStmt(const yy::location& loc)
+        ReturnStmt(const parse::location& loc)
             : Node(loc)
         {}
 

@@ -20,8 +20,8 @@ int main(int argc, char** argv)
     }
 
     reflex::Input lexer_input(source);
-    yy::Lexer lexer(lexer_input);
-    yy::parser parser(lexer);
+    parse::Lexer lexer(lexer_input);
+    parse::parser parser(lexer);
 
     return parser.parse();
 }

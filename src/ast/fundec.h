@@ -10,7 +10,7 @@ namespace ast
     class FunDec : Node
     {
     public:
-        FunDec(const yy::location& loc, misc::symbol name)
+        FunDec(const parse::location& loc, misc::symbol name)
             : Node(loc)
             , name_(name)
         {}
