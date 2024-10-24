@@ -2,6 +2,9 @@
 %language "c++"
 %skeleton "lalr1.cc"
 
+%verbose
+%define parse.trace {true}
+
 %define api.namespace {parse}
 %define api.value.type variant
 %define api.token.constructor
@@ -15,21 +18,24 @@
 %define api.location.file "location.h"
 
 %code requires {
-    namespace parse {
-        class Lexer;
-    }
+  namespace parse
+  {
+      class Lexer;
+  }
   #include "misc/symbol.h"
 }
 
 %parse-param { parse::Lexer& lexer }
 
-%code{
+%code {
   #include "lex.yy.h"  // header file generated with reflex --header-file
   #undef yylex
   #define yylex lexer.yylex  // Within bison's parse() we should invoke lexer.yylex(), not the global yylex()
 }
 
 %define api.token.prefix {TOK_}
+
+%printer { yyo << $$; } <int> <misc::symbol>
 
 %expect 0
 
