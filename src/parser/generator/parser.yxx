@@ -144,6 +144,12 @@ declarator
 direct_declarator
     : ID
     | direct_declarator "(" parameter_type_list ")"
+    | direct_declarator "(" identifier_list ")"
+    ;
+
+identifier_list
+    : %empty
+    // NOTE: For now, this is needed to parse empty paren function decls
     ;
 
 stmt
