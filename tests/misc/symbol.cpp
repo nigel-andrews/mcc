@@ -1,6 +1,7 @@
 #include "misc/symbol.h"
 
 #include <gtest/gtest.h>
+#include <sstream>
 
 TEST(symbol, basic)
 {
@@ -24,4 +25,13 @@ TEST(symbol, get)
     misc::symbol sym(s);
 
     ASSERT_EQ(sym.get(), s);
+}
+
+TEST(symbol, stream)
+{
+    misc::symbol sym = "yeet";
+    std::stringstream sstr;
+    sstr << sym;
+
+    ASSERT_EQ(sstr.str(), sym.get());
 }

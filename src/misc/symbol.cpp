@@ -27,6 +27,11 @@ namespace misc
         return *value_;
     }
 
+    symbol::operator const char*() const
+    {
+        return value_->c_str();
+    }
+
     bool symbol::operator==(const std::string& other) const
     {
         return *value_ == other;

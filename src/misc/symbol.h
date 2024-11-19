@@ -15,6 +15,7 @@ namespace misc
         const std::string& get();
 
         operator const std::string&() const;
+        operator const char*() const;
 
         bool operator==(const std::string& other) const;
         bool operator!=(const std::string& other) const;
