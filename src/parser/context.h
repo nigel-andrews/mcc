@@ -16,7 +16,7 @@ namespace parse
     public:
         ParserContext(std::ifstream& source);
 
-        void parse();
+        int parse();
 
     private:
         reflex::Input input_;

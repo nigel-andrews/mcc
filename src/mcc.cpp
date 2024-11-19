@@ -19,7 +19,5 @@ int main(int argc, char** argv)
     }
 
     parse::ParserContext ctx(source);
-    ctx.parse();
-
-    return 0;
+    return ctx.parse();
 }

@@ -10,8 +10,8 @@ namespace parse
         , parser_(lexer_)
     {}
 
-    void ParserContext::parse()
+    int ParserContext::parse()
     {
-        parser_.parse();
+        return parser_.parse();
     }
 } // namespace parse
