@@ -68,6 +68,8 @@ extern_decl
 
 func_def
     : decl_spec declarator decl_list cmpd_stmt
+    // FIXME: direct_declarators can yield IDs. In such case the parser will accept and reduce the declarator nterm
+    // and continue towards to cmpd_stmt.
     | decl_spec declarator cmpd_stmt
     ;
 
