@@ -14,4 +14,9 @@ namespace parse
     {
         return parser_.parse();
     }
+
+    void ParserContext::debug_trace_set(bool value)
+    {
+        parser_.set_debug_level(value);
+    }
 } // namespace parse

@@ -18,12 +18,15 @@ namespace parse
 
         int parse();
 
+        void debug_trace_set(bool value);
+
     private:
         reflex::Input input_;
         Lexer lexer_;
         Parser parser_;
-
         location location_;
+
+        bool debug_trace_;
     };
 
 } // namespace parse

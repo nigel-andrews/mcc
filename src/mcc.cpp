@@ -19,5 +19,7 @@ int main(int argc, char** argv)
     }
 
     parse::ParserContext ctx(source);
+    ctx.debug_trace_set(true);
+
     return ctx.parse();
 }

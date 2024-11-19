@@ -2,6 +2,9 @@
 %language "c++"
 %skeleton "lalr1.cc"
 
+%verbose
+%define parse.trace
+
 %define api.namespace {parse}
 %define api.value.type variant
 %define api.token.constructor
@@ -30,6 +33,8 @@
 }
 
 %define api.token.prefix {TOK_}
+
+%printer { yyo << $$; } <int> <misc::symbol>
 
 %expect 0
 
@@ -274,6 +279,7 @@ constant_expr
 
 void parse::Parser::error(const location& loc, const std::string& msg)
 {
+  // FIXME: source file name here
   std::cerr << loc << ": " << msg << std::endl;
   if (lexer.size() == 0)      // if token is unknown (no match)
     lexer.matcher().winput(); // skip character
