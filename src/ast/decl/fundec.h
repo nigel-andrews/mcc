@@ -16,6 +16,6 @@ namespace ast
 
     private:
         misc::symbol name_;
-        std::vector<CompoundStmt> body_;
+        CompoundStmt body_;
     };
 } // namespace ast
