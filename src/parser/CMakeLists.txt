@@ -1,6 +1,6 @@
 add_subdirectory(generator)
 
-add_library(parser STATIC context.cpp)
+add_library(parser STATIC context.cpp factory.cpp)
 set_target_properties(parser PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
 add_dependencies(parser generator)
