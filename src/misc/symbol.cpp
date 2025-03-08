@@ -2,8 +2,12 @@
 
 namespace misc
 {
+    symbol::symbol(std::string_view s)
+        : value_(&*set_instance().emplace(s).first)
+    {}
+
     symbol::symbol(const char* s)
-        : value_(&*set_instance().insert(s).first)
+        : value_(&*set_instance().emplace(s).first)
     {}
 
     symbol::symbol(const std::string& s)

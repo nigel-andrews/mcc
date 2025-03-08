@@ -36,6 +36,8 @@ target_compile_options(
 target_link_options(compile_options INTERFACE
                     $<$<CONFIG:Debug>:-fsanitize=address>)
 
+target_include_directories(compile_options INTERFACE ${CMAKE_SOURCE_DIR}/src)
+
 add_subdirectory(src)
 add_subdirectory(tests)
 
@@ -48,6 +50,5 @@ target_include_directories(mcc PUBLIC ${CMAKE_BINARY_DIR}/src)
 # Include directories doesn't work because .... ?
 find_path(REFLEX_PATH reflex)
 target_compile_options(mcc PRIVATE "-I${REFLEX_PATH}")
-
 
 target_link_libraries(mcc PRIVATE compile_options reflex_shared_lib parser misc)

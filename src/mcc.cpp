@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "ast/fwd.h"
 #include "parser/context.h"
 
 int main(int argc, char** argv)

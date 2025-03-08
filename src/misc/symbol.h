@@ -9,6 +9,7 @@ namespace misc
     class symbol
     {
     public:
+        symbol(std::string_view);
         symbol(const char* s = "");
         symbol(const std::string& s);
 

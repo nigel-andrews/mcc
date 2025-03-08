@@ -11,7 +11,7 @@ namespace ast
             : loc_(loc)
         {}
 
-        virtual ~Node() = default;
+        virtual ~Node() = 0;
 
         const parse::location& loc_get()
         {
