@@ -16,6 +16,7 @@
           packages = [
             # programs
             gcc14
+            clang
             gdb
             cmake
             gnumake
