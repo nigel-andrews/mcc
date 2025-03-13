@@ -22,6 +22,7 @@
         class Lexer;
     }
   #include "misc/symbol.h"
+  #include "parser/factory.h"
 }
 
 %parse-param { parse::Lexer& lexer }
@@ -51,6 +52,8 @@
 %token RBRACE "}"
 
 %token EOF 0
+
+%type <ast::IntExpr*> int_constant
 
 %start translation_unit
 
@@ -241,7 +244,7 @@ constant
     ;
 
 int_constant
-    : INT_VAL /* int_suffix */
+    : INT_VAL /* int_suffix */ { $$ = ast::factory::make_int_expr(@$, $1); }
     ;
 
 initializer

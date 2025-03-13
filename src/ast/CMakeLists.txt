@@ -1,4 +1,4 @@
-add_library(ast STATIC)
+add_library(ast STATIC node.cpp)
 
 set_target_properties(ast PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
