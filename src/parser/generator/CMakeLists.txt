@@ -16,6 +16,18 @@ add_custom_command(
 add_library(generator STATIC ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.cpp
                              ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp)
 
+add_custom_command(
+  OUTPUT dummy
+  COMMAND cmake -E echo
+  COMMENT "Generating lexer and parser")
+
+add_custom_target(
+  "parser_generator" ALL
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.cpp
+          ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.h
+          ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp dummy
+  COMMENT "")
+
 set_target_properties(generator PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
 find_path(REFLEX_PATH reflex)
